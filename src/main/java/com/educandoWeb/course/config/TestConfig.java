@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.educandoWeb.course.entities.Category;
 import com.educandoWeb.course.entities.Order;
 import com.educandoWeb.course.entities.User;
 import com.educandoWeb.course.entities.enums.OrderStatus;
+import com.educandoWeb.course.repositories.CategoryRepository;
 import com.educandoWeb.course.repositories.OrderRepository;
 import com.educandoWeb.course.repositories.UserRepository;
 
@@ -22,6 +24,9 @@ public class TestConfig implements CommandLineRunner {
 	private UserRepository userRepository;
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -34,9 +39,12 @@ public class TestConfig implements CommandLineRunner {
 
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		
-		
-		
-		
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
+		Category c1 = new Category(null,"Eletronics");
+		Category c2 = new Category(null,"Books");
+		Category c3 = new Category(null,"Computers");
+		
+		categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
 	}
 }
