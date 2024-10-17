@@ -3,32 +3,34 @@ package com.educandoWeb.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.educandoWeb.course.entities.pk.OrdemItemPK;
+import com.educandoWeb.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_order_item")
-public class OrdemItem implements Serializable {
+public class OrderItem implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private OrdemItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
 	private Double price;
 	
-	public OrdemItem() {
+	public OrderItem() {
 	}
-	public OrdemItem(Order order,Product product,Integer quantity, Double price) {
+	public OrderItem(Order order,Product product,Integer quantity, Double price) {
 		id.setOrder(order);
 		id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -67,7 +69,7 @@ public class OrdemItem implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrdemItem other = (OrdemItem) obj;
+		OrderItem other = (OrderItem) obj;
 		return Objects.equals(id, other.id);
 	}
 	
