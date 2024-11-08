@@ -114,11 +114,11 @@ public class Order implements Serializable {
 		return Objects.hash(id);
 	}
 	
-	public Double Total() {
+	public Double getTotal() {
 		Double total = 0.0;
 		
 		for(OrderItem x : items) {
-			total += x.subTotal();
+			total += x.getSubTotal();
 			
 		}
 		return total;
